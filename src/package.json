@@ -1,0 +1,22 @@
+{
+  "name": "apicinema",
+  "version": "1.0.0",
+  "description": "uma api sobre a logistica de um cinema",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Goesg/apiCinema_Resilia.git"
+  },
+  "author": "caio alves, diego goes, erika , Joana silva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Goesg/apiCinema_Resilia/issues"
+  },
+  "homepage": "https://github.com/Goesg/apiCinema_Resilia#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
