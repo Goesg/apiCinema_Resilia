@@ -15,6 +15,8 @@ app.use("/", clientesController);
 const lancheController = require("./controller/lancheController");
 app.use("/", lancheController);
 
+const filmeController = require("./controller/filmeController")
+app.use("/",filmeController)
 
 ////Definindo servidor////
 const port = process.env.PORT || 3000
