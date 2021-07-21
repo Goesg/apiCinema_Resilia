@@ -1,19 +1,19 @@
-///importando express
+///importando express////
 const express = require("express")
 const app = express()
 
-///importando body-parser
+///importando body-parser////
 const bodyParser = require("body-parser")
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 
 /////rotas da api/////
-////importando rota da entidade sala
-const salaController = require("./controller/salacontroller")
-app.use("/",salaController)
+////importando rota da entidade cliente
+const clientesController = require("./controller/clientes")
+app.use("/", clientesController);
 
 
-////definindo servidor
+////Definindo servidor////
 const port = process.env.PORT || 3000
 
 app.listen(port,(e)=>{
