@@ -15,6 +15,6 @@ const lanche = database.Cinema.define("lanche", {
     }
 });
 
-lanche.sync({force: false})
+//lanche.sync({force: false})
 
 module.exports = lanche;
