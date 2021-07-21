@@ -9,8 +9,11 @@ app.use(bodyParser.json())
 
 /////rotas da api/////
 ////importando rota da entidade cliente
-const clientesController = require("./controller/clientes")
+const clientesController = require("./controller/clientesController")
 app.use("/", clientesController);
+
+const lancheController = require("./controller/lancheController");
+app.use("/", lancheController);
 
 
 ////Definindo servidor////
