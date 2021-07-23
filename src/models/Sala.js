@@ -15,6 +15,4 @@ const sala = database.Cinema.define("sala",{
     },
 })
 
-//sala.sync({force:false})
-
 module.exports = sala

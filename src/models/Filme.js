@@ -18,6 +18,4 @@ const filme = database.Cinema.define("filme", {
     }
 });
 
-//filme.sync({ force: false })
-
 module.exports = filme;

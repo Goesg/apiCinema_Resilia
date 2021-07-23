@@ -3,7 +3,7 @@ const Sequelize = require("sequelize");
 
 ////Criando banco de dados com o sequelize////
 const Cinema = new Sequelize("Cinema", "admin", "senha", {
-    host: "../infra/Cinema.sqlite",
+    storage: "../Cinema.sqlite",
     dialect: "sqlite"
 })
 

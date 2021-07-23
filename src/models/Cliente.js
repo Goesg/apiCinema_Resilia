@@ -17,10 +17,6 @@ const cliente = database.Cinema.define("cliente", {
     }
 });
 
-
-////Criando Tabela////
-//// cliente.sync({force: true});  Só se executa esse comando UMA VEZ pra cada tabela guys... Cuidado!!!
-
 ///Exportando tabela////
 module.exports = cliente;
 
