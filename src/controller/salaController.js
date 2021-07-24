@@ -42,7 +42,7 @@ router.post("/salas",(req,res)=>{
             res.sendStatus(200)
         ).catch(e => res.sendStatus(400))
 })
-/////
+////
 
 ////rota para atualizar uma sala pelo id
 router.patch("/sala/:id",(req,res)=>{
