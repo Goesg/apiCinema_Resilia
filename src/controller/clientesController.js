@@ -10,7 +10,7 @@ const Op = Sequelize.Op;
 router.get("/clientes", (req, res) => {
     Cliente.findAll({raw: true}).then(dados => {
         if(dados!=undefined) {
-            res.json(dados);
+            res.json(dados).status(200);
         }
         else {
             res.sendStatus(404);
@@ -18,16 +18,15 @@ router.get("/clientes", (req, res) => {
     })
 })
 
-
 ////rota para listar uma cliente pelo id
 router.get("/cliente/:id", (req, res) => {
     let id = req.params.id;
     if(isNaN(id)) {
-        res.sendStatus(403)
+        res.send(`Cliente inválido!`).status(400)
     }
     else {
         Cliente.findByPk(id).then(dado => {
-            dado == undefined ? res.sendStatus(402):res.json(dado)
+            dado == undefined ? res.send(`Cliente não encontrado!`).status(404):res.json(dado)
         })
     }
 })
@@ -42,15 +41,15 @@ router.post("/clientes", (req, res) => {
         idade:idade,
         cpf:cpf
     }).then(() => {
-        res.sendstatus(200);
-    }).catch(error => res.sendStatus(error));
+        res.send(`Cliente inserido com sucesso!`).status(200);
+    }).catch(error => res.send(`Cliente inválido!`).status(400));
 })
 
 ////rota para atualizar um cliente pelo id
 router.patch("/cliente/:id", (req, res) => {
     let id = req.params.id
     if(isNaN(id)) {
-        res.sendStatus(400);
+        res.send(`Cliente inválido!`).status(400);
     }
     else {
         Cliente.findByPk(id).then(dado => {
@@ -63,11 +62,11 @@ router.patch("/cliente/:id", (req, res) => {
                     cpf:cpf
                 }, {where:{id:id}}).then(() => {
                     res.send(`Dados alterados com sucesso!`).status(200)
-                    .catch (error => res.send(error).status(400))
+                    .catch (error => res.send(`Não foi possível alterar!`).status(400))
                 })
             }
             else {
-                res.sendStatus(404)
+                res.send(`Não foi possível alterar!`).status(404)
             }
         })
     }
@@ -77,17 +76,17 @@ router.patch("/cliente/:id", (req, res) => {
 router.delete("/cliente/:id", (req, res) => {
     let id = req.params.id;
     if(isNaN(id)) {
-        res.sendStatus(400);
+        res.send(`Cliente inválido!`).status(400);
     }
     else {
         Cliente.findByPk(id).then((dado) => {
             if(dado != undefined) {
                 Cliente.destroy({
                     where:{id:id}
-                }).then(()=> res.send(`Cliente deletado com sucesso!`))
+                }).then(()=> res.send(`Cliente deletado com sucesso!`).status(200))
             }
             else {
-                res.sendStatus(404);
+                res.send(`Não foi possível deletar!`).status(404);
             }
         })
     }
