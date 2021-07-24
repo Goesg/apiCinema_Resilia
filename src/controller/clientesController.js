@@ -45,7 +45,7 @@ router.post("/clientes", (req, res) => {
         res.sendstatus(200);
     }).catch(error => res.sendStatus(error));
 })
-
+////
 ////rota para atualizar um cliente pelo id
 router.patch("/cliente/:id", (req, res) => {
     let id = req.params.id
