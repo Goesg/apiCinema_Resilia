@@ -9,14 +9,13 @@ const Sequelize = require("sequelize");
 router.get("/clientes", (req, res) => {
     Cliente.findAll({raw: true}).then(dados => {
         if(dados!=undefined) {
-            res.json(dados);
+            res.json(dados).status(200);
         }
         else {
             res.sendStatus(404);
         }
     })
 })
-
 
 ////rota para listar uma cliente pelo id
 router.get("/cliente/:id", (req, res) => {
@@ -83,7 +82,7 @@ router.delete("/cliente/:id", (req, res) => {
             if(dado != undefined) {
                 Cliente.destroy({
                     where:{id:id}
-                }).then(()=> res.send(`Cliente deletado com sucesso!`))
+                }).then(()=> res.send(`Cliente deletado com sucesso!`).status(200))
             }
             else {
                 res.send(`clinte específico não encontrado`).status(404)
