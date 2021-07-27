@@ -12,7 +12,8 @@ app.use(bodyParser.json())
 const Clientes = require("./models/Cliente");
 const Filmes = require("./models/Filme");
 const lanches = require("./models/Lanche");
-const Salas = require("./models/Sala")
+const Salas = require("./models/Sala");
+const Funcionario = require("./models/Funcionario");
 /////2° passo: sincronizar o banco de dados cinema
 const cinema = require("./infra/database").Cinema.sync()
 .then(() => console.log("Banco de dados pronto para uso!!!"))
