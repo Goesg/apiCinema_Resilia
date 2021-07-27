@@ -10,9 +10,9 @@ const Op = Sequelize.Op
 router.get("/salas",(req,res)=>{
     Sala.findAll({raw:true}).then(dados=>{
         if(dados!=undefined){
-            res.json(dados)
+            res.json(dados).status(200)
         }else{
-            res.sendStatus(402)
+            res.send(`nenhuma sala foi encontrada`).status(404)
         }
     })
 })
@@ -21,10 +21,10 @@ router.get("/salas",(req,res)=>{
 router.get("/sala/:id",(req,res)=>{
     let id = req.params.id
         if(isNaN(id)){
-            res.sendStatus(403)
+            res.send(`parâmetro da requisição inválido, ulitilize apenas números`).status(400)
         }else{
             Sala.findByPk(id).then(dado => {
-                dado == undefined ? res.sendStatus(402):res.json(dado)
+                dado == undefined ? res.send(`sala específica não encotrada`).status(404):res.json(dado).status(200)
             })
         }
 })
@@ -40,7 +40,7 @@ router.post("/salas",(req,res)=>{
             cadeiras:cadeiras
         }).then(()=>
             res.sendStatus(200)
-        ).catch(e => res.sendStatus(400))
+        ).catch(e => res.send(`erro ao adicionar uma nova sala`).status(400))
 })
 ////
 
@@ -48,7 +48,7 @@ router.post("/salas",(req,res)=>{
 router.patch("/sala/:id",(req,res)=>{
     let id = req.params.id
         if(isNaN(id)){
-            res.sendStatus(400)
+            res.send(`parâmetro da requisição inválido, ulitilize apenas números`).status(400)
         }else{
             Sala.findByPk(id).then(dado => {
                 if(dado != undefined){
@@ -60,7 +60,7 @@ router.patch("/sala/:id",(req,res)=>{
                     },{where:{id:id}}).then(()=>res.sendStatus(200))
                     .catch(e => res.sendStatus(400))
                 }else{
-                    res.sendStatus(404)
+                    res.send(`sala específica não encotrada`).status(404)
                 }
             })
         }
@@ -70,16 +70,16 @@ router.patch("/sala/:id",(req,res)=>{
 router.delete("/sala/:id",(req,res)=>{
     let id = req.params.id
         if(isNaN(id)){
-            res.sendStatus(400)
+            res.send(`parâmetro da requisição inválido, ulitilize apenas números`).status(400)
         }else{
             Sala.findByPk(id).then((dado)=>{
                 if(dado != undefined){
                     Sala.destroy({
                         where:{id:id}
-                    }).then(()=>res.sendStatus(200))
+                    }).then(()=>res.send(`sala deletada removida com sucesso!!`).status(200))
                     .catch(e => res.sendStatus(400))
                 }else{
-                    res.sendStatus(404)
+                    res.send(`sala específica não encotrada`).status(404)
                 }
             })
         }
