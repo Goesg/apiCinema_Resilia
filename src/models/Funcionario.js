@@ -1,6 +1,6 @@
 const database = require('../infra/database');
 
-const lanche = database.Cinema.define("funcionario", {
+const funcionario = database.Cinema.define("funcionario", {
     nome: {
         type: database.Sequelize.STRING,
         allowNull: false
@@ -19,4 +19,4 @@ const lanche = database.Cinema.define("funcionario", {
     }
 });
 
-module.exports = lanche;
+module.exports = funcionario;

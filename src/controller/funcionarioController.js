@@ -4,7 +4,7 @@ const Funcionario = require("../models/Funcionario");
 ////rota para listar todos os funcionarios
 router.get("/funcionarios",(req,res)=>{
     Funcionario.findAll({raw:true}).then(dados => 
-     dados != undefined ? res.json(dados): res.send(`Nenhum funcionário foi encontrado`).status(404)
+     dados != undefined ? res.json(dados): res.sendStatus(404)
     ).catch(e => res.sendStatus(400))
 });
 
@@ -13,13 +13,13 @@ router.get("/funcionario/:id",(req,res)=>{
     let id = req.params.id
     
     if(isNaN(id)){
-        res.send(`parâmetro da requisição inválido, ulitilize apenas números`).status(400)
+        res.sendStatus(400)
     }else{
         Funcionario.findByPk(id).then(dado => {
             if(dado != undefined){
                 res.json(dado)
             }else{
-                res.send(`funcinário específico não encotrado`).status(404)
+                res.sendStatus(404)
             }
         })
     }
@@ -34,16 +34,16 @@ router.post("/funcionarios",(req,res)=>{
             turno:turno,
             cargo:cargo,
         }).then(dados => {
-            res.send(`novo funcionário adicionado com sucesso`).status(200)
+            res.sendStatus(200)
         }).catch(e => 
             res.sendStatus(400))
 });
 
-////rota para atualizar um funcionario pelo is
+////rota para atualizar um funcionario pelo id
 router.patch("/funcionario/:id",(req,res)=>{
     let id = req.params.id
         if(isNaN(id)){
-            res.send(`parâmetro da requisição inválido, ulitilize apenas números`).status(400)
+            res.sendStatus(400)
         }else{
             Funcionario.findByPk(id).then(dado => {
                 if(dados != undefined){
@@ -53,10 +53,10 @@ router.patch("/funcionario/:id",(req,res)=>{
                         salario:salario,
                         cargo:cargo,
                         turno:turno,
-                    },{where:{id:id}}).then(() => res.send(`funcionário alterado com sucesso!!!`).status(200))
-                    .catch(e => res.send(`erro ao alterar o funcionário`).status(400))
+                    },{where:{id:id}}).then(() => res.sendStatus(200))
+                    .catch(e => res.sendStatus(400))
                 }else{
-                    res.send(`funcinário específico não encotrado`).status(404)
+                    res.sendStatus(404)
                 }
             })
         }
@@ -66,15 +66,15 @@ router.patch("/funcionario/:id",(req,res)=>{
 router.delete("/funcionario/:id",(req,res)=>{
     let id = req.params.id 
         if(isNaN(id)){
-            res.send(`parâmetro da requisição inválido, ulitilize apenas números`).status(400)
+            res.sendStatus(400)
         }else{
             Funcionario.findByPk(id).then(dado => {
                 if(dado!=undefined){
                     Funcionario.destroy({
                         where:{id:id}
-                    }).then(()=>res.send(`funcionário deletado com sucesso !!!`).status(200))
+                    }).then(()=>res.sendStatus(200))
                 }else{
-                    res.send(`funcinário específico não encotrado`).status(404)
+                    res.sendSatus(404)
                 }
             })
         }
