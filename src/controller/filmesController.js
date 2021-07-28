@@ -6,7 +6,7 @@ const Filme = require("../models/Filme")
 ////rota para listar todos os filmes
 router.get("/filmes",(req,res)=>{
     Filme.findAll({raw:true}).then(dados => 
-     dados != undefined ? res.json(dados): res.send(`Nenhum filme foi encontrado`).status(404)
+     dados != undefined ? res.json(dados): res.sendStatus(404)
     ).catch(e => res.sendStatus(400))
 });
 
@@ -15,13 +15,13 @@ router.get("/filme/:id",(req,res)=>{
     let id = req.params.id
     
     if(isNaN(id)){
-        res.send(`parâmetro da requisição inválido, ulitilize apenas números`).status(400)
+        res.sendStatus(400)
     }else{
         Filme.findByPk(id).then(dado => {
             if(dado != undefined){
                 res.json(dado)
             }else{
-                res.send(`filme específico não encontrado`).status(404)
+                res.sendStatus(404)
             }
         })
     }
@@ -36,16 +36,16 @@ router.post("/filmes",(req,res)=>{
            classificacao:classificacao,
            lancamento:lancamento,
         }).then(dados => {
-            res.send(`novo filme adicionado com sucesso`).status(200)
+            res.sendStatus(200)
         }).catch(e => 
-            res.send(`erro ao adicionar um novo filme`).status(400))
+            res.sendStatus(400))
 });
 
 ////rota para atualizar um filme pelo is
 router.patch("/filme/:id",(req,res)=>{
     let id = req.params.id
         if(isNaN(id)){
-            res.send(`parâmetro da requisição inválido, ulitilize apenas números`).status(400)
+            res.sendStatus(400)
         }else{
             Filme.findByPk(id).then(dado => {
                 if(dado != undefined){
@@ -55,10 +55,10 @@ router.patch("/filme/:id",(req,res)=>{
                         genero:genero,
                         classificacao:classificacao,
                         lancamento:lancamento,
-                    },{where:{id:id}}).then(() => res.send(`filme alterado com sucesso!!!`).status(200))
-                    .catch(e => res.send(`erro ao alterar o filme`).status(400))
+                    },{where:{id:id}}).then(() => res.sendStatus(200))
+                    .catch(e => res.sendStatus(400))
                 }else{
-                    res.send(`filme específico não encontrado`).status(404)
+                    res.sendStatus(404)
                 }
             })
         }
@@ -68,15 +68,15 @@ router.patch("/filme/:id",(req,res)=>{
 router.delete("/filme/:id",(req,res)=>{
     let id = req.params.id 
         if(isNaN(id)){
-            res.send(`parâmetro da requisição inválido, ulitilize apenas números`).status(400)
+            res.sendStatus(400)
         }else{
             Filme.findByPk(id).then(dado => {
                 if(dado!=undefined){
                     Filme.destroy({
                         where:{id:id}
-                    }).then(()=> res.send(`filme deletado com sucesso!!!`))
+                    }).then(()=> res.sendStatus(200))
                 }else{
-                    res.send(`filme específico não encontrado`).status(404)
+                    res.sendStatus(404)
                 }
             })
         }

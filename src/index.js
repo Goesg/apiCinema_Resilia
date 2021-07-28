@@ -7,6 +7,10 @@ const bodyParser = require("body-parser")
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 
+////importando o cors
+const cors = require("cors")
+app.use(cors());
+
 ///////sincronizando o banco de dados/////////
 /////1° passo: importar os models
 const Clientes = require("./models/Cliente");
@@ -35,6 +39,10 @@ app.use("/",filmesController)
 const salaController = require("./controller/salaController")
 ////Definindo servidor////
 app.use("/",salaController)
+
+////importando rotas da entidade funcionario
+const funcionarioController = require("./controller/funcionarioController")
+app.use("/", funcionarioController );
 
 ////////servidor///////
 const port = process.env.PORT || 3000
