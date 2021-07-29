@@ -45,7 +45,7 @@ router.patch("/lanche/:id",(req,res)=>{
             res.sendStatus(400)
         }else{
             Lanche.findByPk(id).then(dado => {
-                if(dados != undefined){
+                if(dado != undefined){
                     let {nome,preco,data_validade} = req.body
                     Lanche.update({
                         nome:nome,
