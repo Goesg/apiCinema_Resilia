@@ -46,7 +46,7 @@ router.patch("/funcionario/:id",(req,res)=>{
             res.sendStatus(400)
         }else{
             Funcionario.findByPk(id).then(dado => {
-                if(dados != undefined){
+                if(dado != undefined){
                     let {nome,salario,turno,cargo} = req.body
                     Funcionario.update({
                         nome:nome,
